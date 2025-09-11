@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"path": "../Machine learning"
+		},
+		{
+			"path": "../compilers"
+		},
+		{
+			"path": "../cp"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"iostream": "cpp",
+			"ostream": "cpp",
+			"bitset": "cpp",
+			"valarray": "cpp",
+			"array": "cpp",
+			"initializer_list": "cpp",
+			"regex": "cpp",
+			"utility": "cpp",
+			"cmath": "cpp",
+			"string": "cpp"
+		},
+		"liveServer.settings.multiRootWorkspaceName": "practice projects"
+	}
+}
