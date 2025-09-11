@@ -7,9 +7,9 @@ CORS(app)  # Allow requests from frontend
 @app.route('/api/chat', methods=['POST'])
 def chat():
     user_message = request.json.get('message')
-    # For now, echo the user's message as the bot reply
-    bot_response = f"You said: {user_message}"
-    return jsonify({'response': bot_response})
+    print(f"Received question: {user_message}")  # Log to terminal
+    # Reply with the same question text
+    return jsonify({'response': user_message})
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

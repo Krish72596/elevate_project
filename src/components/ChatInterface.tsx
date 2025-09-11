@@ -21,7 +21,7 @@ const ChatInterface = () => {
   ]);
   const [inputMessage, setInputMessage] = useState("");
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!inputMessage.trim()) return;
 
     const newMessage: Message = {
@@ -34,16 +34,30 @@ const ChatInterface = () => {
     setMessages(prev => [...prev, newMessage]);
     setInputMessage("");
 
-    // Simulate AI response
-    setTimeout(() => {
+    // Send to Flask backend
+    try {
+      const res = await fetch("http://localhost:5000/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: inputMessage }),
+      });
+      const data = await res.json();
       const aiResponse: Message = {
         id: (Date.now() + 1).toString(),
-        content: "🖥️ Core CS Visual Elements\n\n• Code Snippets:\n  • Hello, World!\n  • If (Coffee) { Code(); } Else { Sleep(); }\n  • While(True) { Learn(); }\n\n• Binary Patterns (E.G., 01001000 01001001 For \"HI\").\n\n• ASCII Characters ({;} [] < >; // Styled Creatively).\n\n• Flowcharts / Logic Gates (AND, OR, NOT).\n\n• Circuit Board Traces (Abstract PCB Pattern).",
+        content: data.response,
         isUser: false,
         timestamp: new Date(),
       };
       setMessages(prev => [...prev, aiResponse]);
-    }, 1000);
+    } catch (error) {
+      const errorResponse: Message = {
+        id: (Date.now() + 2).toString(),
+        content: "Error: Could not connect to backend.",
+        isUser: false,
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, errorResponse]);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
