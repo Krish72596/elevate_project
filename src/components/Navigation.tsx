@@ -10,7 +10,6 @@ const Navigation = () => {
   const navItems = [
     { label: "Home", href: "/" },
     { label: "Contests & Hackathons", href: "/contests" },
-    { label: "Career Guides", href: "/careers" },
     { label: "Ask Chatbot", href: "/chatbot" },
     { label: "About Us", href: "/about" },
   ];
